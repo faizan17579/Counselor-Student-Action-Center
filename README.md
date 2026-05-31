@@ -177,9 +177,3 @@ React Query keeps the data flow simple and production-friendly. It handles fetch
 ## How Task Status Updates Work
 
 When the counselor changes a task’s status, the frontend sends a `PATCH` request to the backend. The backend validates the status, updates the in-memory mock task, and returns the updated task. The React Query mutation then updates the cached action-center data and refetches to keep the UI consistent.
-
-## Demo Student
-
-The frontend uses a fixed demo student id: `stu_001`.
-
-If you paste your own mock data into `server/src/data/mockData.ts`, keep the same exported structure and make sure the demo student id matches the frontend constant in `client/src/pages/ActionCenterPage.tsx`.
