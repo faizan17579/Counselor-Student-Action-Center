@@ -1,0 +1,10 @@
+::ffff:127.0.0.1 GET /students/stu_001/action-center 200 2427 - 2.511 ms 3c0af4e8-42e0-4086-afe6-ff3d003834ee
+::ffff:127.0.0.1 PATCH /students/stu_001/messages/msg_001/read 200 2205 - 1.526 ms 6b7a4db6-33d7-48b6-8705-c8a3278f3f70
+::ffff:127.0.0.1 GET /students/stu_001/action-center 200 2205 - 0.450 ms d8208d7c-b5e4-49d9-8091-49f623855223
+
+PASS  tests/actionCenter.int.test.ts
+Action Center integration
+  √ mark single message as read reduces unread count
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total

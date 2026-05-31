@@ -1,3 +1,75 @@
+# Counselor Student Action Center — Bonus Assessment
+
+This repo contains the full-stack action center (Express + TypeScript backend, React + Vite frontend) with additional production-ready improvements and tests.
+
+## Production improvements
+
+- Request logging: added `morgan` request logging with a `reqId` token so each request includes a unique request id for tracing.
+- Request ID and error middleware: every request gets a UUID `x-request-id`; the error handler returns JSON containing the `requestId` so support staff can correlate logs.
+- Minimal structured error logging: errors are logged as JSON to stderr to make ingestion into logging systems easier.
+
+Performance decisions and tradeoffs:
+
+- Using `morgan` and console JSON logging is lightweight and low-overhead for a single-process app. For higher throughput or multi-process deployments, replace console logging with a structured logger (winston/pino) and ship logs to a central collector.
+- Request IDs are generated per-request (UUID v4). For extremely high QPS systems, consider using shorter collision-resistant IDs (e.g., ULID) to reduce size.
+- Tests run locally; integration tests interact with the file-backed mock store and restore it after the run. In production, replace the mock store with a real database and run tests against a disposable test database/fixtures.
+
+## How to run tests locally
+
+Server:
+
+```bash
+cd server
+npm install
+npm test
+```
+
+Client:
+
+```bash
+cd client
+npm install
+npm test
+```
+
+## CI
+
+CI should run both server and client tests. Example steps:
+
+```bash
+# server
+cd server && npm ci && npm test
+# client
+cd client && npm ci && npm test
+```
+
+## Test outputs
+
+Server integration test output (excerpt):
+
+```
+PASS  tests/actionCenter.int.test.ts
+  Action Center integration
+    √ mark single message as read reduces unread count
+
+Test Suites: 1 passed, 1 total
+Tests:       1 passed, 1 total
+```
+
+Client unit test output (excerpt):
+
+```
+PASS  src/components/UnreadMessagesCard.test.tsx
+  UnreadMessagesCard
+    ✓ renders count and opens modal
+
+Test Files  1 passed (1)
+Tests  1 passed (1)
+```
+
+## Notes on publishing
+
+I implemented the changes in this workspace. To submit a public GitHub repository, push this project to a new public repository and include this README. If you'd like, I can prepare a git branch and provide the exact git commands to push.
 # Counselor Student Action Center
 
 Mini full-stack assessment project for a counselor to review one student’s profile, unread messages, task list, urgency level, and task status updates.

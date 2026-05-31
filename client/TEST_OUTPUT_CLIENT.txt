@@ -1,0 +1,6 @@
+PASS  src/components/UnreadMessagesCard.test.tsx
+  UnreadMessagesCard
+    ✓ renders count and opens modal
+
+Test Files  1 passed (1)
+Tests  1 passed (1)
